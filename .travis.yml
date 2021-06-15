@@ -31,4 +31,3 @@ install:
 
 script:
     - vendor/bin/phpunit --colors
-
