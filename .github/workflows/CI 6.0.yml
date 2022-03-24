@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: [ '8.0.2' ]
+        php-version: [ '8.0.2', '8.1' ]
         symfony-version: [ '6.0', '6.1' ]
     steps:
       - name: Setup PHP, with composer and extensions
@@ -32,15 +32,14 @@ jobs:
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
       - name: Composer cache dependencies
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-
 
-      - name: Composer install (Symfony version ${{ matrix.symfony-version }})
-        if: matrix.php-version != '8.0'
-        run: composer install --prefer-source
+      - name: Composer update (Symfony version ${{ matrix.symfony-version }})
+        run: composer update --prefer-source
 
       - name: Run tests
         run: vendor/bin/phpunit
