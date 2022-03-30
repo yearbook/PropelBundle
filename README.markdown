@@ -1,7 +1,7 @@
 PropelBundle
 ============
 
-[![Github actions Status](https://github.com/SkyFoxvn/PropelBundle/actions/workflows/CI%3A6.0.yml/badge.svg?branch=6.0)](https://github.com/SkyFoxvn/PropelBundle/actions/workflows/CI-6.0.yml?query=workflow%3ACI+branch%3A5.0)
+[![Github actions Status](https://github.com/SkyFoxvn/PropelBundle/actions/workflows/CI%206.0.yml/badge.svg?branch=6.0)](https://github.com/SkyFoxvn/PropelBundle/actions/workflows/CI%206.0.yml)
 [![codecov](https://codecov.io/gh/SkyFoxvn/PropelBundle/branch/6.0/graph/badge.svg?token=L1thFB9nOG)](https://codecov.io/gh/SkyFoxvn/PropelBundle)
 [![Minimum PHP Version](http://img.shields.io/badge/php-%3E%3D%208.0.2-8892BF.svg)](https://php.net/)
 
@@ -20,11 +20,6 @@ As `Propel2` will be released in the near future, we are migrating the branching
 * The `4.0` branch contains `Propel2` integration for Symfony *3.4-4.x*.
 * The `5.0` branch contains `Propel2` integration for Symfony **4.x|5.x**.
 * The `6.0` branch contains `Propel2` integration for Symfony **6.x**.
-
-## Version 5.0 Changes
-* PHP 7.2+ support is added
-* support for **s4+** no bundle dir structure is added(Bundle dir structure also work)
-* XML/YML schema directory: **project_root/config**
 
 ## Version 6.0 Changes
 
