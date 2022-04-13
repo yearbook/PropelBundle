@@ -78,12 +78,12 @@ class PropelBundle extends Bundle
 
                 $manager->setReadConfiguration($slaveConnections);
             } else {
-                $manager = new ConnectionManagerSingle($name);
+                $manager = new ConnectionManagerSingle();
                 $manager->setConfiguration($connection);
             }
 
             $serviceContainer->setAdapterClass($name, $connection['adapter']);
-            $serviceContainer->setConnectionManager($manager);
+            $serviceContainer->setConnectionManager($name, $manager);
 
             // load database maps
             if(file_exists($config['paths']['loaderScriptDir'].'/loadDatabase.php') && is_readable($config['paths']['loaderScriptDir'].'/loadDatabase.php')) {
@@ -101,7 +101,7 @@ class PropelBundle extends Bundle
             $connection = $manager->getReadConnection($serviceContainer->getAdapter($manager->getName()));
             $connection->setLogMethods(array_merge($connection->getLogMethods(), array('prepare')));
 
-            $connection = $manager->getWriteConnection();
+            $connection = $manager->getWriteConnection($serviceContainer->getAdapter($manager->getName()));
             $connection->setLogMethods(array_merge($connection->getLogMethods(), array('prepare')));
         }
     }
