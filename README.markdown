@@ -2,7 +2,7 @@ PropelBundle
 ============
 
 [![Github actions Status](https://github.com/SkyFoxvn/PropelBundle/actions/workflows/CI%206.0.yml/badge.svg?branch=6.0)](https://github.com/SkyFoxvn/PropelBundle/actions/workflows/CI%206.0.yml)
-[![codecov](https://codecov.io/gh/SkyFoxvn/PropelBundle/branch/6.0/graph/badge.svg?token=L1thFB9nOG)](https://codecov.io/gh/SkyFoxvn/PropelBundle)
+[![codecov](https://codecov.io/gh/SkyFoxvn/PropelBundle/branch/6.0/graph/badge.svg?token=GsBNYniEtk)](https://codecov.io/gh/SkyFoxvn/PropelBundle)
 [![Minimum PHP Version](http://img.shields.io/badge/php-%3E%3D%208.0.2-8892BF.svg)](https://php.net/)
 
 
