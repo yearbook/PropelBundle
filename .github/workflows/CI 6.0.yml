@@ -5,6 +5,8 @@ on:
     branches:
       - '6.0'
   pull_request:
+    branches:
+      - '6.0'
   workflow_dispatch:
 
 jobs:
@@ -26,6 +28,8 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.MY_PAT }}
 
       - name: Composer get cache directory
         id: composer-cache
@@ -39,13 +43,16 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Composer update (Symfony version ${{ matrix.symfony-version }})
-        run: composer update --prefer-source
+        run: composer install --prefer-dist --no-interaction
 
       - name: Run tests
-        run: vendor/bin/phpunit
+        run: vendor/bin/phpunit --verbose --coverage-clover=Tests/coverage.xml
 
       - name: Code Coverage Report
         uses: codecov/codecov-action@v2
         with:
+          token: ${{ secrets.CODECOV_TOKEN }}
           flags: ${{ matrix.php-version }}, ${{ matrix.symfony-version }}
           file: Tests/coverage.xml
+          fail_ci_if_error: true
+          verbose: true
