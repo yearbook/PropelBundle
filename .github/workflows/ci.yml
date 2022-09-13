@@ -55,9 +55,9 @@ jobs:
 
       - name: Code Coverage Report
         if: matrix.php-version != '8.0'
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: Tests/coverage.xml
+          file: ./Tests/coverage.xml
           fail_ci_if_error: true
           verbose: true
