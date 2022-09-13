@@ -1,12 +1,12 @@
-name: CI Branch 5.0
+name: CI Branch 5.1
 
 on:
   push:
     branches:
-      - '5.0'
+      - '5.1'
   pull_request:
     branches:
-      - '5.0'
+      - '5.1'
   workflow_dispatch:
 
 jobs:
@@ -63,7 +63,6 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          flags: ${{ matrix.php-version }}, ${{ matrix.symfony-version }}
           file: Tests/coverage.xml
           fail_ci_if_error: true
           verbose: true
