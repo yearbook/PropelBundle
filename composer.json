@@ -15,7 +15,7 @@
     },
     "require": {
         "php": ">=8.0.2",
-        "propel/propel": "2.0.0-beta1",
+        "propel/propel": "2.0.0-beta2",
         "symfony/console": "^5.0||^6.0",
         "symfony/dependency-injection": "^6.0",
         "symfony/framework-bundle": "^6.0",
@@ -23,10 +23,24 @@
         "symfony/yaml": "^5.0||^6.0"
     },
     "require-dev": {
+        "ext-json": "*",
+        "ext-simplexml": "*",
+        "ext-pdo": "*",
         "phpunit/phpunit": "*",
         "sensio/framework-extra-bundle": "^6.0",
         "symfony/form": "^6.0",
         "fakerphp/faker": "*",
-        "mikey179/vfsstream": "^1.6"
+        "mikey179/vfsstream": "^1.6",
+        "phpstan/phpstan": "^1.8",
+        "phpstan/extension-installer": "^1.1",
+        "phpstan/phpstan-deprecation-rules": "^1.0",
+        "phpstan/phpstan-symfony": "^1.2",
+        "twig/twig": "*",
+        "symfony/stopwatch": "^5.4"
+    },
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
     }
 }

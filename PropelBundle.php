@@ -12,9 +12,11 @@ namespace Propel\Bundle\PropelBundle;
 
 use Propel\Bundle\PropelBundle\DependencyInjection\Security\UserProvider\PropelFactory;
 use Propel\Runtime\Connection\ConnectionManagerPrimaryReplica;
+use Propel\Runtime\Connection\ConnectionWrapper;
 use Propel\Runtime\Propel;
 use Propel\Runtime\Connection\ConnectionManagerSingle;
-
+use Propel\Runtime\ServiceContainer\StandardServiceContainer;
+use Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -28,7 +30,7 @@ class PropelBundle extends Bundle
     /**
      * {@inheritdoc}
      */
-    public function boot()
+    public function boot(): void
     {
         try {
             $this->configureConnections();
@@ -43,26 +45,29 @@ class PropelBundle extends Bundle
     /**
      * {@inheritdoc}
      */
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         parent::build($container);
 
         if ($container->hasExtension('security')) {
-            $container->getExtension('security')->addUserProviderFactory(new PropelFactory('propel', 'propel.security.user.provider'));
+            /** @var SecurityExtension $securityExtension */
+            $securityExtension = $container->getExtension('security');
+            $securityExtension->addUserProviderFactory(new PropelFactory('propel', 'propel.security.user.provider'));
         }
     }
 
-    protected function configureConnections()
+    protected function configureConnections(): void
     {
         $config = $this->container->getParameter('propel.configuration');
         $defaultConnection = !empty($config['runtime']['defaultConnection']) ? $config['runtime']['defaultConnection'] : key($config['database']['connections']);
 
+        /** @var StandardServiceContainer $serviceContainer */
         $serviceContainer = Propel::getServiceContainer();
         $serviceContainer->setDefaultDatasource($defaultConnection);
 
         foreach ($config['database']['connections'] as $name => $connection) {
             if (!empty($connection['slaves'])) {
-                $manager = new ConnectionManagerPrimaryReplica();
+                $manager = new ConnectionManagerPrimaryReplica($name);
 
                 // configure the master (write) connection
                 $manager->setWriteConfiguration($connection);
@@ -78,12 +83,12 @@ class PropelBundle extends Bundle
 
                 $manager->setReadConfiguration($slaveConnections);
             } else {
-                $manager = new ConnectionManagerSingle();
+                $manager = new ConnectionManagerSingle($name);
                 $manager->setConfiguration($connection);
             }
 
             $serviceContainer->setAdapterClass($name, $connection['adapter']);
-            $serviceContainer->setConnectionManager($name, $manager);
+            $serviceContainer->setConnectionManager($manager);
 
             // load database maps
             if(file_exists($config['paths']['loaderScriptDir'].'/loadDatabase.php') && is_readable($config['paths']['loaderScriptDir'].'/loadDatabase.php')) {
@@ -92,15 +97,18 @@ class PropelBundle extends Bundle
         }
     }
 
-    protected function configureLogging()
+    protected function configureLogging(): void
     {
+        /** @var StandardServiceContainer $serviceContainer */
         $serviceContainer = Propel::getServiceContainer();
         $serviceContainer->setLogger('defaultLogger', $this->container->get('propel.logger'));
 
         foreach ($serviceContainer->getConnectionManagers() as $manager) {
+            /** @var ConnectionWrapper $connection */
             $connection = $manager->getReadConnection($serviceContainer->getAdapter($manager->getName()));
             $connection->setLogMethods(array_merge($connection->getLogMethods(), array('prepare')));
 
+            /** @var ConnectionWrapper $connection */
             $connection = $manager->getWriteConnection($serviceContainer->getAdapter($manager->getName()));
             $connection->setLogMethods(array_merge($connection->getLogMethods(), array('prepare')));
         }

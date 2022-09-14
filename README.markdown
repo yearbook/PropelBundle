@@ -29,11 +29,11 @@ As `Propel2` will be released in the near future, we are migrating the branching
 - propel/propel
 
 ### Composer command
-- composer require propel/propel "2.0.0-beta1"
+- composer require propel/propel "2.0.0-beta2"
 - composer require skyfox/propel-bundle "6.0.0" or "6.0.x-dev"
 
 ### composer.json -> add in "require"
-- "propel/propel": "2.0.0-beta1"
+- "propel/propel": "2.0.0-beta2"
 - "skyfox/propel-bundle": "6.0.0" or "6.0.x-dev"
 
 ## Features

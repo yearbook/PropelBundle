@@ -18,11 +18,11 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
  */
 class Configuration extends PropelConfiguration
 {
-    private $debug;
-    private $defaultDir;
-    private $kernelDir;
+    private bool $debug;
+    private string $defaultDir;
+    private string $kernelDir;
 
-    public function __construct($debug, $kernelDir)
+    public function __construct(bool $debug, string $kernelDir)
     {
         $this->debug = $debug;
         $this->defaultDir = $kernelDir.'/propel';
