@@ -18,7 +18,7 @@ As `Propel2` will be released in the near future, we are migrating the branching
 * The `2.0` branch contains `Propel2` integration for Symfony *2.5-2.8*.
 * The `3.0` branch contains `Propel2` integration for Symfony *2.8-3.x*.
 * The `5.0` branch contains `Propel2`(branch **2.0.0-beta1**) integration for Symfony **4.x|5.x** and PHP **7.2** - **8.0**.
-* The `5.1` branch contains `Propel2`(branch **2.0.0-beta2**) integration for Symfony **4.x|5.x** and PHP **7.4** - **8.1**.
+* The `5.1` branch contains `Propel2`(branch **2.0.0-beta2**) integration for Symfony **4.x|5.x|6.x** and PHP **7.4** - **8.1**.
 * The `6.0` branch contains `Propel2`(branch **2.0.0-beta2**) integration for Symfony **6.x**. and PHP **8.0.2+**
 
 ## Version 5.0 Changes
