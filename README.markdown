@@ -37,7 +37,7 @@ As `Propel2` will be released in the near future, we are migrating the branching
 
 ### composer.json -> add in "require"
 - "propel/propel": "2.0.0-beta2"
-- "skyfox/propel-bundle": "5.0.0" or "5.0.x-dev"
+- "skyfox/propel-bundle": "5.1.0"(or newer tag/release) or "5.0.x-dev"
 
 ## Features
 
